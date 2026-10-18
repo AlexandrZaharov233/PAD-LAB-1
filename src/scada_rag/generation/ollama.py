@@ -1,4 +1,7 @@
 import json
+import socket
+import urllib.error
+import urllib.parse
 import urllib.request
 
 REFUSAL = "В загруженных документах недостаточно информации для ответа на этот вопрос."
@@ -10,11 +13,32 @@ SCHEMA = {"type": "object", "properties": {"answerable": {"type": "boolean"}, "a
 def request_json(base, route, payload=None, timeout=600):
     data = json.dumps(payload).encode("utf-8") if payload is not None else None
     req = urllib.request.Request(base + route, data=data, headers={"Content-Type": "application/json"})
+    # Windows can inherit a system proxy even for the local Ollama service.
+    local = urllib.parse.urlsplit(base).hostname in {"localhost", "127.0.0.1", "::1"}
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler({})) if local else urllib.request.build_opener()
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as response:
-            return json.load(response)
+        with opener.open(req, timeout=timeout) as response:
+            result = json.load(response)
+        if not isinstance(result, dict):
+            raise ValueError("Ожидался JSON-объект")
+        return result
+    except urllib.error.HTTPError as exc:
+        detail = exc.read(2000).decode("utf-8", errors="replace")
+        try:
+            detail = json.loads(detail).get("error", detail)
+        except (ValueError, AttributeError):
+            pass
+        if exc.code == 404 and payload and "model" in str(detail).casefold():
+            model = payload.get("model", "qwen2.5:3b")
+            raise RuntimeError(f"Модель {model} не найдена в Ollama. Выполните: ollama pull {model}") from exc
+        raise RuntimeError(f"Ошибка Ollama HTTP {exc.code}: {str(detail)[:500]}") from exc
     except OSError as exc:
-        raise RuntimeError(f"Ollama недоступен или модель не загружена. Проверьте запуск Ollama и ollama pull. {exc}") from exc
+        reason = getattr(exc, "reason", exc)
+        if isinstance(reason, (TimeoutError, socket.timeout)):
+            raise RuntimeError(f"Ollama не завершила запрос за {timeout} с. Проверьте её окно и загрузку памяти; затем повторите вопрос.") from exc
+        raise RuntimeError(f"Нет соединения с Ollama по адресу {base}. Запустите Ollama. Подробности: {reason}") from exc
+    except (ValueError, UnicodeError) as exc:
+        raise RuntimeError("Ollama вернула некорректный ответ. Проверьте адрес и работу локального сервиса Ollama.") from exc
 
 
 def messages(question, hits, variant="strict"):
@@ -59,7 +83,8 @@ def generate(question, hits, cfg):
         "model": cfg["llm_model"], "messages": messages(question, hits, cfg["prompt_variant"]),
         "stream": False, "format": SCHEMA, "keep_alive": "5m",
         "options": {"temperature": cfg["temperature"], "seed": 42, "num_ctx": cfg["num_ctx"],
-                    "num_predict": cfg["max_answer_tokens"], "num_thread": cfg["cpu_threads"]}})
+                    "num_predict": cfg["max_answer_tokens"], "num_thread": cfg["cpu_threads"]}},
+        timeout=cfg.get("generation_timeout_seconds", 180))
     try:
         value = json.loads(response["message"]["content"])
     except (ValueError, KeyError, TypeError):

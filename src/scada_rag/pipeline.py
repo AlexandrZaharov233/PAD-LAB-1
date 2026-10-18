@@ -16,6 +16,11 @@ class Pipeline:
         self.store = VectorStore.build(self.cfg, self.docs, self.embedder, log)
         self.reranker = None
 
+    def load_reranker(self, log=print):
+        if self.reranker is None:
+            log("Загрузка модели переранжирования. При первом запуске требуется интернет...")
+            self.reranker = Reranker(self.cfg["reranker_model"])
+
     def retrieve(self, question, overrides=None, query_vector=None):
         cfg = {**self.cfg, **(overrides or {})}
         started = time.perf_counter()
@@ -23,8 +28,7 @@ class Pipeline:
         raw = self.store.search(vector, cfg["top_k"], cfg.get("source_id") or None)
         filtered = filter_hits(raw, cfg["similarity_threshold"])
         if cfg["use_reranker"] and filtered:
-            if self.reranker is None:
-                self.reranker = Reranker(cfg["reranker_model"])
+            self.load_reranker()
             filtered = self.reranker.rank(question, filtered)
         context = filter_hits(filtered, cfg["similarity_threshold"], cfg["context_k"],
                               cfg["reranker_threshold"] if cfg["use_reranker"] else None)

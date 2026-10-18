@@ -48,6 +48,8 @@ def main():
             return
         from scada_rag.pipeline import Pipeline
         pipeline = Pipeline()
+        if args.command == "prepare" and pipeline.cfg["use_reranker"]:
+            pipeline.load_reranker()
         if args.command == "ask":
             print(json.dumps(pipeline.ask(args.question), ensure_ascii=False, indent=2))
         elif args.command == "evaluate":

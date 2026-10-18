@@ -17,5 +17,6 @@
   "cpu_threads": 6,
   "context_chars": 8500,
   "num_ctx": 8192,
-  "max_answer_tokens": 280
+  "max_answer_tokens": 280,
+  "generation_timeout_seconds": 180
 }

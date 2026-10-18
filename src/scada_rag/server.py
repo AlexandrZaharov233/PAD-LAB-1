@@ -16,7 +16,7 @@ class Application:
     def __init__(self):
         self.pipeline = None
         self.lock = threading.Lock()
-        self.state = {"busy": False, "ready": False, "logs": [], "error": None}
+        self.state = {"busy": False, "ready": False, "answering": False, "logs": [], "error": None}
 
     def log(self, message):
         self.state["logs"] = (self.state["logs"] + [str(message)])[-100:]
@@ -41,6 +41,8 @@ class Application:
                 gc.collect()
                 self.log("Загрузка embedding-модели и построение индекса...")
                 self.pipeline = Pipeline(log=self.log)
+                if self.pipeline.cfg["use_reranker"]:
+                    self.pipeline.load_reranker(self.log)
                 self.state["ready"] = True
                 self.log("Система готова. Можно задавать вопросы.")
             except Exception as exc:
@@ -57,10 +59,15 @@ class Application:
         docs = documents()
         try:
             tags = request_json(cfg["ollama_url"], "/api/tags", timeout=2)
-            models = [m["name"] for m in tags.get("models", [])]
-            ollama = {"running": True, "model_ready": cfg["llm_model"] in models}
-        except RuntimeError:
-            ollama = {"running": False, "model_ready": False}
+            entries = tags.get("models")
+            if not isinstance(entries, list):
+                raise RuntimeError("Ollama вернула некорректный список моделей")
+            models = [m.get("name") for m in entries if isinstance(m, dict)]
+            ready = cfg["llm_model"] in models
+            ollama = {"running": True, "model_ready": ready,
+                      "error": None if ready else "Скачайте модель: ollama pull " + cfg["llm_model"]}
+        except RuntimeError as exc:
+            ollama = {"running": False, "model_ready": False, "error": str(exc)}
         return {**self.state, "documents": len(docs), "chunks": self.pipeline.store.meta["chunk_count"] if self.pipeline else 0,
                 "config": cfg, "ollama": ollama,
                 "sources": [{k: d.get(k) for k in ("id", "source", "title", "url", "updated_at", "note")} for d in docs],
@@ -84,7 +91,11 @@ def make_handler(app):
         def do_GET(self):
             path = urllib.parse.urlsplit(self.path).path
             if path == "/api/status":
-                return self.reply(app.status())
+                try:
+                    return self.reply(app.status())
+                except Exception as exc:
+                    traceback.print_exc()
+                    return self.reply({"error": "Ошибка получения состояния: " + str(exc)}, 500)
             if path == "/api/results":
                 files = sorted((ROOT / "experiments").rglob("comparison.json"), reverse=True)
                 return self.reply([{"path": str(p.relative_to(ROOT)), "rows": read_json(p)} for p in files[:15]])
@@ -96,6 +107,7 @@ def make_handler(app):
             self.send_response(200)
             self.send_header("Content-Type", {".html": "text/html", ".js": "text/javascript", ".css": "text/css"}[file.suffix] + "; charset=utf-8")
             self.send_header("Content-Length", str(len(payload)))
+            self.send_header("Cache-Control", "no-store")
             self.end_headers()
             self.wfile.write(payload)
 
@@ -118,15 +130,21 @@ def make_handler(app):
                     if not app.lock.acquire(blocking=False):
                         return self.reply({"error": "Дождитесь завершения предыдущего запроса"}, 409)
                     try:
+                        app.state["answering"] = True
+                        app.log("Обработка вопроса: поиск контекста и ожидание ответа Ollama...")
                         allowed = {k: v for k, v in body.get("settings", {}).items() if k in {"top_k", "context_k", "similarity_threshold", "use_reranker", "source_id", "prompt_variant"}}
                         checked = config(allowed)
-                        return self.reply(app.pipeline.ask(body.get("question"), {k: checked[k] for k in allowed}))
+                        result = app.pipeline.ask(body.get("question"), {k: checked[k] for k in allowed})
+                        app.log("Ответ подготовлен.")
+                        return self.reply(result)
                     finally:
+                        app.state["answering"] = False
                         app.lock.release()
                 return self.reply({"error": "Не найдено"}, 404)
             except (ValueError, TypeError, KeyError) as exc:
                 self.reply({"error": str(exc)}, 400)
             except Exception as exc:
+                traceback.print_exc()
                 self.reply({"error": str(exc)}, 500)
     return Handler
 
