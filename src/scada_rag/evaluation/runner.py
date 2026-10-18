@@ -82,7 +82,7 @@ def run_experiments(suite="retrieval", split="dev", log=print, limit=None):
         if limit < 2:
             raise ValueError("Для эксперимента нужны хотя бы два вопроса")
         questions = random.Random(42).sample(questions, min(limit, len(questions)))
-    base = config()
+    base = config(read_json(ROOT / "configs/experiment_baseline.json", {}) if suite == "retrieval" else {})
     variants = [("baseline", {})]
     if suite == "retrieval":
         variants += [("fixed_600", {"chunk_strategy": "fixed", "chunk_size": 600, "chunk_overlap": 0}),
@@ -94,6 +94,7 @@ def run_experiments(suite="retrieval", split="dev", log=print, limit=None):
                      ("paragraphs", {"chunk_strategy": "paragraphs", "chunk_overlap": 0}),
                      ("k3", {"top_k": 3}), ("k5", {"top_k": 5}), ("k10", {"top_k": 10}),
                      ("without_reranker", {"use_reranker": False}),
+                     ("reranker_threshold_0", {"reranker_threshold": 0.0}),
                      ("threshold_068", {"similarity_threshold": 0.68}),
                      ("threshold_080", {"similarity_threshold": 0.80}),
                      ("e5_embedding_only", {"similarity_threshold": 0.0, "use_reranker": False}),
@@ -106,7 +107,7 @@ def run_experiments(suite="retrieval", split="dev", log=print, limit=None):
     folder = ROOT / "experiments/runs" / (time.strftime("%Y%m%d-%H%M%S") + "-suite-" + suite + "-" + split)
     summaries, pipeline, last_index = [], None, None
     for name, overrides in variants:
-        cfg = config(overrides)
+        cfg = config({**base, **overrides})
         identity = tuple(cfg[k] for k in ("embedding_model", "chunk_strategy", "chunk_size", "chunk_overlap"))
         if identity != last_index:
             if pipeline is not None and pipeline.cfg["embedding_model"] == cfg["embedding_model"]:

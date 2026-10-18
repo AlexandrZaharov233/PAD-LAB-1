@@ -6,7 +6,7 @@ $venv = Join-Path $PSScriptRoot '.venv\Scripts\python.exe'
 if (-not (Test-Path $venv)) { throw 'Сначала выполните setup.bat' }
 Get-CimInstance Win32_Process | Where-Object {
     $_.ExecutablePath -eq $venv -and $_.CommandLine -match '\bscada_rag\s+serve\b'
-} | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }
+} | ForEach-Object { & taskkill.exe /PID $_.ProcessId /T /F }
 $ollama = Get-Command 'ollama.exe' -ErrorAction SilentlyContinue
 if ($ollama) { & $ollama.Source stop qwen2.5:3b }
 Write-Host 'Локальный сервер перезапускается...'

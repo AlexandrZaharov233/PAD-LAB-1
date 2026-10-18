@@ -9,7 +9,7 @@ INDEX_KEYS = ("embedding_model", "chunk_strategy", "chunk_size", "chunk_overlap"
 
 def index_folder(cfg, docs):
     identity = {k: cfg[k] for k in INDEX_KEYS}
-    identity.update({"corpus": corpus_hash(docs), "version": 2,
+    identity.update({"corpus": corpus_hash(docs), "version": 3 if cfg["chunk_strategy"] == "paragraphs" else 2,
                      "revision": read_json(ROOT / "configs/model_revisions.json", {}).get(cfg["embedding_model"])})
     return DATA / "indexes" / digest(identity)[:20]
 

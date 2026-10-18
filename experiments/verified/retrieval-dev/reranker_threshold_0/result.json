@@ -1,0 +1,91 @@
+{
+  "name": "reranker_threshold_0",
+  "at": "2026-10-18T15:08:43.767475+00:00",
+  "config": {
+    "embedding_model": "intfloat/multilingual-e5-small",
+    "alternative_embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "reranker_model": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "llm_model": "qwen2.5:3b",
+    "ollama_url": "http://127.0.0.1:11434",
+    "chunk_strategy": "sections",
+    "chunk_size": 1000,
+    "chunk_overlap": 150,
+    "top_k": 20,
+    "context_k": 5,
+    "similarity_threshold": 0.72,
+    "use_reranker": true,
+    "reranker_threshold": 0.0,
+    "prompt_variant": "strict",
+    "temperature": 0.0,
+    "cpu_threads": 6,
+    "context_chars": 8500,
+    "num_ctx": 8192,
+    "max_answer_tokens": 280
+  },
+  "summary": {
+    "question_count": 24,
+    "answerable_count": 21,
+    "generation_enabled": false,
+    "raw": {
+      "mrr": 0.5578937130407718,
+      "hit_rate": 0.9523809523809523,
+      "recall": 0.9523809523809523,
+      "all_evidence": 0.9523809523809523,
+      "precision": 0.05238095238095238
+    },
+    "context": {
+      "mrr": 0.7380952380952381,
+      "hit_rate": 0.8571428571428571,
+      "recall": 0.8571428571428571,
+      "all_evidence": 0.8571428571428571,
+      "precision": 0.18095238095238098
+    },
+    "answer": {},
+    "retrieval_seconds_mean": 1.0306511991666696,
+    "index": {
+      "complete": true,
+      "created_at": "2026-10-18T15:03:41.233028+00:00",
+      "corpus_hash": "f802bee1347819ddec34dd4b78450cd279e885200a51b48d149cf520b05dfd80",
+      "dimension": 384,
+      "model_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+      "chunk_count": 204,
+      "config": {
+        "embedding_model": "intfloat/multilingual-e5-small",
+        "chunk_strategy": "sections",
+        "chunk_size": 1000,
+        "chunk_overlap": 150
+      },
+      "truncated_chunks": 0
+    },
+    "timing_note": "Query embeddings вычислены пакетом до замера; первая загрузка reranker входит в время первого запроса."
+  },
+  "corpus_hash": "f802bee1347819ddec34dd4b78450cd279e885200a51b48d149cf520b05dfd80",
+  "python": "3.12.14",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "questions": [
+    "q01",
+    "q02",
+    "q03",
+    "q04",
+    "q05",
+    "q06",
+    "q07",
+    "q08",
+    "q09",
+    "q10",
+    "q11",
+    "q12",
+    "q13",
+    "q14",
+    "q15",
+    "q16",
+    "q17",
+    "q18",
+    "q31",
+    "q32",
+    "q33",
+    "q37",
+    "q38",
+    "q39"
+  ]
+}

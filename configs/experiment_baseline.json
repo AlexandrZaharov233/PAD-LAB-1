@@ -1,0 +1,21 @@
+{
+  "embedding_model": "intfloat/multilingual-e5-small",
+  "alternative_embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "reranker_model": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+  "llm_model": "qwen2.5:3b",
+  "ollama_url": "http://127.0.0.1:11434",
+  "chunk_strategy": "sections",
+  "chunk_size": 1000,
+  "chunk_overlap": 150,
+  "top_k": 20,
+  "context_k": 5,
+  "similarity_threshold": 0.72,
+  "use_reranker": true,
+  "reranker_threshold": 0.05,
+  "prompt_variant": "strict",
+  "temperature": 0.0,
+  "cpu_threads": 6,
+  "context_chars": 8500,
+  "num_ctx": 8192,
+  "max_answer_tokens": 280
+}

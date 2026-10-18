@@ -39,6 +39,12 @@ class CoreTests(unittest.TestCase):
         self.assertEqual({c['page'] for c in chunks},{1,2})
         self.assertTrue(all(len(c['text'])<=250 for c in chunks))
 
+    def test_pdf_paragraph_boundaries(self):
+        first='Первый отдельный абзац содержит сведения о промышленной системе.'
+        second='Второй отдельный абзац описывает меры защиты и работу оператора.'
+        doc={**DOC,'blocks':[{'section':'Страница','page':1,'text':first+'\n\n'+second}]}
+        self.assertEqual([c['text'] for c in chunk_document(doc,'paragraphs',500,0)],[first,second])
+
     def test_normalization(self):
         self.assertEqual(clean('систе-\nма\u00a0  управления\u00ad'),'система управления')
 

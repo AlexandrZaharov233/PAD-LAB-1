@@ -1,0 +1,138 @@
+[
+  {
+    "name": "baseline",
+    "raw_recall": 0.9523809523809523,
+    "context_recall": 0.8571428571428571,
+    "context_mrr": 0.7380952380952381,
+    "context_precision": 0.18095238095238098,
+    "seconds_mean": 1.0949592415000022
+  },
+  {
+    "name": "fixed_600",
+    "raw_recall": 0.9523809523809523,
+    "context_recall": 0.8095238095238095,
+    "context_mrr": 0.7261904761904762,
+    "context_precision": 0.17142857142857143,
+    "seconds_mean": 0.6891799341250078
+  },
+  {
+    "name": "fixed_1000",
+    "raw_recall": 1.0,
+    "context_recall": 0.9523809523809523,
+    "context_mrr": 0.873015873015873,
+    "context_precision": 0.2,
+    "seconds_mean": 1.0675227605416733
+  },
+  {
+    "name": "fixed_1400",
+    "raw_recall": 1.0,
+    "context_recall": 0.9523809523809523,
+    "context_mrr": 0.8904761904761904,
+    "context_precision": 0.2,
+    "seconds_mean": 1.3631125558750057
+  },
+  {
+    "name": "overlap_0",
+    "raw_recall": 1.0,
+    "context_recall": 0.9523809523809523,
+    "context_mrr": 0.873015873015873,
+    "context_precision": 0.2,
+    "seconds_mean": 1.0802667091250175
+  },
+  {
+    "name": "overlap_150",
+    "raw_recall": 1.0,
+    "context_recall": 0.9523809523809523,
+    "context_mrr": 0.8650793650793651,
+    "context_precision": 0.2,
+    "seconds_mean": 1.0215715108333445
+  },
+  {
+    "name": "overlap_300",
+    "raw_recall": 0.9523809523809523,
+    "context_recall": 0.9047619047619048,
+    "context_mrr": 0.8571428571428571,
+    "context_precision": 0.2,
+    "seconds_mean": 1.0576312370416285
+  },
+  {
+    "name": "paragraphs",
+    "raw_recall": 0.7142857142857143,
+    "context_recall": 0.6190476190476191,
+    "context_mrr": 0.5333333333333333,
+    "context_precision": 0.12380952380952381,
+    "seconds_mean": 0.44568185800000987
+  },
+  {
+    "name": "k3",
+    "raw_recall": 0.7142857142857143,
+    "context_recall": 0.6666666666666666,
+    "context_mrr": 0.6428571428571429,
+    "context_precision": 0.13333333333333333,
+    "seconds_mean": 0.1441550597916527
+  },
+  {
+    "name": "k5",
+    "raw_recall": 0.7142857142857143,
+    "context_recall": 0.6666666666666666,
+    "context_mrr": 0.6428571428571429,
+    "context_precision": 0.13333333333333333,
+    "seconds_mean": 0.25588039479166963
+  },
+  {
+    "name": "k10",
+    "raw_recall": 0.8095238095238095,
+    "context_recall": 0.7619047619047619,
+    "context_mrr": 0.7142857142857143,
+    "context_precision": 0.1523809523809524,
+    "seconds_mean": 0.4804396691666568
+  },
+  {
+    "name": "without_reranker",
+    "raw_recall": 0.9523809523809523,
+    "context_recall": 0.7142857142857143,
+    "context_mrr": 0.5396825396825397,
+    "context_precision": 0.14285714285714288,
+    "seconds_mean": 0.0004847052916640375
+  },
+  {
+    "name": "reranker_threshold_0",
+    "raw_recall": 0.9523809523809523,
+    "context_recall": 0.8571428571428571,
+    "context_mrr": 0.7380952380952381,
+    "context_precision": 0.18095238095238098,
+    "seconds_mean": 1.0306511991666696
+  },
+  {
+    "name": "threshold_068",
+    "raw_recall": 0.9523809523809523,
+    "context_recall": 0.8571428571428571,
+    "context_mrr": 0.7380952380952381,
+    "context_precision": 0.18095238095238098,
+    "seconds_mean": 1.0191024344166426
+  },
+  {
+    "name": "threshold_080",
+    "raw_recall": 0.9523809523809523,
+    "context_recall": 0.8571428571428571,
+    "context_mrr": 0.7380952380952381,
+    "context_precision": 0.18095238095238098,
+    "seconds_mean": 0.8823662011249856
+  },
+  {
+    "name": "e5_embedding_only",
+    "raw_recall": 0.9523809523809523,
+    "context_recall": 0.7142857142857143,
+    "context_mrr": 0.5396825396825397,
+    "context_precision": 0.14285714285714288,
+    "seconds_mean": 0.0004894818750074137
+  },
+  {
+    "name": "alternative_embedding_only",
+    "raw_recall": 0.8095238095238095,
+    "context_recall": 0.38095238095238093,
+    "context_mrr": 0.20396825396825397,
+    "context_precision": 0.0761904761904762,
+    "seconds_mean": 0.0004213715000389584
+  }
+]

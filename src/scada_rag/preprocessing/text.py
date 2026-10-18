@@ -48,12 +48,14 @@ def chunk_document(doc, strategy="sections", size=1000, overlap=150):
     seen = set()
     for (section, page), text in groups:
         step_overlap = overlap if strategy in ("overlap", "sections") else 0
-        for part in windows(text, size, step_overlap, boundary=strategy in ("sections", "paragraphs")):
-            if len(part) < 40 or part in seen:
-                continue
-            seen.add(part)
-            chunks.append({"id": digest([doc["id"], section, page, part])[:24], "source_id": doc["id"],
-                           "source": doc["source"], "url": doc["url"], "title": doc["title"], "section": section,
-                           "page": page, "text": part, "language": doc["language"], "note": doc.get("note", ""),
-                           "updated_at": doc["updated_at"]})
+        paragraphs = re.split(r"\n\s*\n", text) if strategy == "paragraphs" else [text]
+        for paragraph in paragraphs:
+            for part in windows(paragraph, size, step_overlap, boundary=strategy in ("sections", "paragraphs")):
+                if len(part) < 40 or part in seen:
+                    continue
+                seen.add(part)
+                chunks.append({"id": digest([doc["id"], section, page, part])[:24], "source_id": doc["id"],
+                               "source": doc["source"], "url": doc["url"], "title": doc["title"], "section": section,
+                               "page": page, "text": part, "language": doc["language"], "note": doc.get("note", ""),
+                               "updated_at": doc["updated_at"]})
     return chunks
