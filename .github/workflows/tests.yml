@@ -19,5 +19,7 @@ jobs:
         shell: powershell
         run: |
           $errors = $null
-          [System.Management.Automation.Language.Parser]::ParseFile((Join-Path $PWD 'setup.ps1'), [ref]$null, [ref]$errors) | Out-Null
-          if ($errors.Count -gt 0) { $errors | Format-List; exit 1 }
+          foreach ($script in @('setup.ps1', 'restart.ps1')) {
+            [System.Management.Automation.Language.Parser]::ParseFile((Join-Path $PWD $script), [ref]$null, [ref]$errors) | Out-Null
+            if ($errors.Count -gt 0) { $errors | Format-List; exit 1 }
+          }

@@ -63,7 +63,7 @@ if (-not $ollama -or -not $tesseract) { throw 'Не удалось найти Ol
 try { Invoke-RestMethod 'http://127.0.0.1:11434/api/tags' -TimeoutSec 3 | Out-Null }
 catch { Start-Process -FilePath $ollama -ArgumentList 'serve' -WindowStyle Minimized; Start-Sleep -Seconds 4 }
 Run-Checked $ollama @('pull','qwen2.5:3b')
-Write-Host 'Загрузка документов, OCR и перевод ANRE. Первый запуск может занять значительное время.'
+Write-Host 'Загрузка документов и OCR ANRE. Первый запуск может занять значительное время.'
 Run-Checked $venv @('-m','scada_rag','prepare')
 Run-Checked $venv @('-m','unittest','discover','-s','tests','-v')
 Run-Checked $venv @('-m','scada_rag','doctor')

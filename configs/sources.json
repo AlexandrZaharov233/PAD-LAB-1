@@ -1,27 +1,108 @@
 {
   "sources": [
     {
-      "id": "anre-586", "kind": "anre_pdf", "language": "ru",
+      "id": "anre-586",
+      "kind": "anre_pdf",
+      "language": "ro",
       "title": "ANRE №586 от 16.10.2024: методология оценки критериев риска технических проверок",
       "registry": "https://anre.md/registru-hotraririlor-3-371?decision_number=586&year=2024",
       "match": "586 din 16.10.2024",
-      "pages": [1, 32], "ocr_language": "ron", "translate_to_russian": true,
-      "note": "Неофициальный машинный перевод румынского оригинала после OCR. Возможны ошибки распознавания и перевода; сверяйте формулировки и числа с PDF. Это методология технического надзора, а не методика оценки киберрисков SCADA."
+      "pages": [
+        1,
+        32
+      ],
+      "ocr_language": "ron",
+      "note": "Румынский оригинал после OCR. Интерфейс и ответы на русском. Возможны ошибки распознавания, особенно в таблицах; сверяйте формулировки и числа с PDF. Это методология технического надзора, а не методика оценки киберрисков SCADA."
     },
-    {"id":"rapid-introduction","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/software-overview/introduction"},
-    {"id":"rapid-applications","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/software-overview/applications"},
-    {"id":"rapid-architecture","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/software-overview/architecture"},
-    {"id":"rapid-requirements","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/installation/system-requirements"},
-    {"id":"rapid-safety","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/installation/safety"},
-    {"id":"rapid-database","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/configuration/database"},
-    {"id":"rapid-polling","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/configuration/device-polling"},
-    {"id":"rapid-channels","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/configuration/channels"},
-    {"id":"rapid-scripts","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/configuration/scripts"},
-    {"id":"rapid-users","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/configuration/user-management"},
-    {"id":"rapid-gate","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/modules/mod-rapid-gate"},
-    {"id":"rapid-export","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/modules/mod-db-export"},
-    {"id":"rapid-modbus","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/modules/drv-modbus-slave"},
-    {"id":"rapid-audit","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/enterprise-edition/plg-audit"},
-    {"id":"rapid-guard","kind":"html","language":"ru","url":"https://rapidscada.net/docs/ru/6.4/enterprise-edition/plg-guard"}
+    {
+      "id": "rapid-introduction",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/software-overview/introduction"
+    },
+    {
+      "id": "rapid-applications",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/software-overview/applications"
+    },
+    {
+      "id": "rapid-architecture",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/software-overview/architecture"
+    },
+    {
+      "id": "rapid-requirements",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/installation/system-requirements"
+    },
+    {
+      "id": "rapid-safety",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/installation/safety"
+    },
+    {
+      "id": "rapid-database",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/configuration/database"
+    },
+    {
+      "id": "rapid-polling",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/configuration/device-polling"
+    },
+    {
+      "id": "rapid-channels",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/configuration/channels"
+    },
+    {
+      "id": "rapid-scripts",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/configuration/scripts"
+    },
+    {
+      "id": "rapid-users",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/configuration/user-management"
+    },
+    {
+      "id": "rapid-gate",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/modules/mod-rapid-gate"
+    },
+    {
+      "id": "rapid-export",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/modules/mod-db-export"
+    },
+    {
+      "id": "rapid-modbus",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/modules/drv-modbus-slave"
+    },
+    {
+      "id": "rapid-audit",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/enterprise-edition/plg-audit"
+    },
+    {
+      "id": "rapid-guard",
+      "kind": "html",
+      "language": "ru",
+      "url": "https://rapidscada.net/docs/ru/6.4/enterprise-edition/plg-guard"
+    }
   ]
 }

@@ -8,5 +8,3 @@ beautifulsoup4==4.13.4
 pypdf==5.9.0
 pypdfium2==4.30.0
 pytesseract==0.3.13
-sentencepiece==0.2.0
-sacremoses==0.1.1

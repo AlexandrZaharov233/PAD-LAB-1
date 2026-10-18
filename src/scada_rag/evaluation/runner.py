@@ -109,9 +109,14 @@ def run_experiments(suite="retrieval", split="dev", log=print, limit=None):
         cfg = config(overrides)
         identity = tuple(cfg[k] for k in ("embedding_model", "chunk_strategy", "chunk_size", "chunk_overlap"))
         if identity != last_index:
-            del pipeline
-            gc.collect()
-            pipeline = Pipeline(cfg, log)
+            if pipeline is not None and pipeline.cfg["embedding_model"] == cfg["embedding_model"]:
+                from scada_rag.retrieval.store import VectorStore
+                pipeline.cfg = cfg
+                pipeline.store = VectorStore.build(cfg, pipeline.docs, pipeline.embedder, log)
+            else:
+                del pipeline
+                gc.collect()
+                pipeline = Pipeline(cfg, log)
             last_index = identity
         log("Эксперимент: " + name)
         summary, rows = evaluate(pipeline, questions, cfg, generation=suite == "generation", log=log)

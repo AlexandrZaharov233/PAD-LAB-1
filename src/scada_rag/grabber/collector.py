@@ -106,7 +106,7 @@ def parse_pdf(raw, source, log=print):
     reader = PdfReader(io.BytesIO(raw))
     start, end = source.get("pages", [1, len(reader.pages)])
     if end > len(reader.pages):
-        raise ValueError("ANRE: изменился состав PDF; проверьте диапазон русской части")
+        raise ValueError("ANRE: изменился состав PDF; проверьте диапазон страниц")
     result, rendered = [], None
     for n in range(start, end + 1):
         text = clean(reader.pages[n - 1].extract_text() or "")
@@ -136,9 +136,6 @@ def parse_pdf(raw, source, log=print):
         result.append({"text": text, "section": f"ANRE №586, страница PDF {n}", "page": n, "extraction": method})
     if rendered is not None:
         rendered.close()
-    if source.get("translate_to_russian"):
-        from scada_rag.grabber.translation import translate_blocks
-        result = translate_blocks(result, log)
     return source["title"], result
 
 
@@ -161,26 +158,26 @@ def collect(log=print):
             if raw is None:
                 if not raw_path.exists() or not output.exists():
                     raw, headers, final_url = fetch(url)
-            if raw is None and old.get("parser_version") != 5:
+            if raw is None and old.get("parser_version") != 6:
                 raw = raw_path.read_bytes()
-            if raw is None or (output.exists() and digest(raw) == old.get("sha256") and old.get("parser_version") == 5):
+            if raw is None or (output.exists() and digest(raw) == old.get("sha256") and old.get("parser_version") == 6):
                 status = "unchanged"
             else:
                 snapshot = read_json(DATA / "snapshots" / f"{sid}.json")
-                if snapshot and snapshot.get("sha256") == digest(raw) and snapshot.get("parser_version") == 5:
-                    log(sid + ": скачанный оригинал совпадает с проверенным снимком; используем кэш OCR/перевода")
+                if snapshot and snapshot.get("sha256") == digest(raw) and snapshot.get("parser_version") == 6:
+                    log(sid + ": скачанный оригинал совпадает с проверенным снимком; используем кэш OCR")
                     doc = {**snapshot, "url": final_url, "updated_at": now()}
                 else:
                     title, blocks = parse_pdf(raw, source, log) if source["kind"] == "anre_pdf" else parse_html(raw)
                     doc = {"id": sid, "source": "ANRE" if sid.startswith("anre") else "Rapid SCADA 6.4",
-                           "url": final_url, "title": title, "language": "ru", "note": source.get("note", ""),
-                           "sha256": digest(raw), "updated_at": now(), "blocks": blocks, "parser_version": 5}
+                           "url": final_url, "title": title, "language": source.get("language", "ru"), "note": source.get("note", ""),
+                           "sha256": digest(raw), "updated_at": now(), "blocks": blocks, "parser_version": 6}
                 # Keep last good processed document if downloading/parsing fails.
                 raw_path.write_bytes(raw)
                 write_json(output, doc)
                 status = "updated" if old else "new"
                 old = {"url": url, "sha256": digest(raw), "etag": headers.get("ETag"),
-                       "last_modified": headers.get("Last-Modified"), "parser_version": 5}
+                       "last_modified": headers.get("Last-Modified"), "parser_version": 6}
             old.update({"checked_at": now(), "last_error": None})
             state[sid] = old
             item = {"id": sid, "status": status, "at": now()}

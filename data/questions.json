@@ -1,7 +1,7 @@
 {
   "version": 1,
   "language": "ru",
-  "annotation": "Эталоны и короткие текстовые якоря размечены по официальной документации. ANRE - OCR и неофициальный машинный перевод. Dev предназначен для выбора параметров, test для отложенной проверки.",
+  "annotation": "Эталоны и короткие текстовые якоря размечены по официальной документации. ANRE - OCR румынского оригинала, вопросы и эталоны на русском. Dev предназначен для выбора параметров, test для отложенной проверки.",
   "questions": [
     {
       "id": "q01",
@@ -674,6 +674,126 @@
       "expected_answer": "Прогнозов погоды в корпусе нет.",
       "answer_keywords": [],
       "evidence": []
+    },
+    {
+      "id": "q37",
+      "split": "dev",
+      "type": "context",
+      "question": "Каким постановлением и когда утверждена методология ANRE по критериям риска технических проверок?",
+      "answerable": true,
+      "expected_answer": "Методология утверждена постановлением ANRE №586 от 16 октября 2024 года.",
+      "answer_keywords": [
+        "586",
+        "2024"
+      ],
+      "evidence": [
+        {
+          "source_id": "anre-586",
+          "contains": [
+            "16 octombrie 2024"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q38",
+      "split": "dev",
+      "type": "context",
+      "question": "Какие объекты перечислены в названии методологии ANRE №586?",
+      "answerable": true,
+      "expected_answer": "Электроустановки, электростанции и электрические сети.",
+      "answer_keywords": [
+        "электроустанов",
+        "электростанц",
+        "сет"
+      ],
+      "evidence": [
+        {
+          "source_id": "anre-586",
+          "contains": [
+            "instalaţiilor, centralelor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q39",
+      "split": "dev",
+      "type": "context",
+      "question": "Как методология ANRE определяет риск через вероятность и воздействие события?",
+      "answerable": true,
+      "expected_answer": "Риск определяется как произведение вероятности события и его воздействия.",
+      "answer_keywords": [
+        "вероятност",
+        "воздейств"
+      ],
+      "evidence": [
+        {
+          "source_id": "anre-586",
+          "contains": [
+            "Riscul este definit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q40",
+      "split": "test",
+      "type": "context",
+      "question": "Для чего в методологии ANRE учитывается вес каждого критерия?",
+      "answerable": true,
+      "expected_answer": "Баллы критериев соотносятся с их весом и значимостью для общего риска, затем объекты ранжируются.",
+      "answer_keywords": [
+        "вес",
+        "риск"
+      ],
+      "evidence": [
+        {
+          "source_id": "anre-586",
+          "contains": [
+            "ponderea fiecărui criteriu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q41",
+      "split": "test",
+      "type": "context",
+      "question": "При каких двух видах планирования проверок применяется анализ риска ANRE?",
+      "answerable": true,
+      "expected_answer": "При ежегодном планировании технических проверок и принятии решения о внеплановой проверке.",
+      "answer_keywords": [
+        "ежегодн",
+        "внепланов"
+      ],
+      "evidence": [
+        {
+          "source_id": "anre-586",
+          "contains": [
+            "planificarea anuală"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q42",
+      "split": "test",
+      "type": "context",
+      "question": "Учитывается ли установленная электрическая мощность электростанции в критериях ANRE?",
+      "answerable": true,
+      "expected_answer": "Да, установленная электрическая мощность электростанции включена в перечень критериев риска.",
+      "answer_keywords": [
+        "мощност"
+      ],
+      "evidence": [
+        {
+          "source_id": "anre-586",
+          "contains": [
+            "puterea electrică instalată"
+          ]
+        }
+      ]
     }
   ]
 }
