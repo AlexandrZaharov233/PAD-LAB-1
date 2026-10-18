@@ -1,0 +1,679 @@
+{
+  "version": 1,
+  "language": "ru",
+  "annotation": "Эталоны и короткие текстовые якоря размечены по официальной документации. ANRE - OCR и неофициальный машинный перевод. Dev предназначен для выбора параметров, test для отложенной проверки.",
+  "questions": [
+    {
+      "id": "q01",
+      "split": "dev",
+      "type": "fact",
+      "question": "Что такое Rapid SCADA и для каких задач она используется?",
+      "answerable": true,
+      "expected_answer": "Rapid SCADA является открытой платформой промышленной автоматизации для мониторинга и диспетчеризации.",
+      "answer_keywords": [
+        "платформа",
+        "мониторинга"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-introduction",
+          "contains": [
+            "платформа для промышленной автоматизации"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q02",
+      "split": "dev",
+      "type": "lookup",
+      "question": "Какие промышленные протоколы перечислены в обзоре Rapid SCADA?",
+      "answerable": true,
+      "expected_answer": "Перечислены OPC UA, OPC Classic, Modbus, MQTT и SNMP.",
+      "answer_keywords": [
+        "Modbus",
+        "MQTT"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-introduction",
+          "contains": [
+            "OPC UA, OPC Classic, Modbus, MQTT, SNMP"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q03",
+      "split": "dev",
+      "type": "fact",
+      "question": "По какому протоколу взаимодействуют приложения Rapid SCADA?",
+      "answerable": true,
+      "expected_answer": "Приложения взаимодействуют по TCP.",
+      "answer_keywords": [
+        "TCP"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-architecture",
+          "contains": [
+            "протоколу TCP"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q04",
+      "split": "dev",
+      "type": "fact",
+      "question": "Для чего в архитектуре Rapid SCADA нужен Коммуникатор?",
+      "answerable": true,
+      "expected_answer": "Коммуникатор собирает данные с контроллеров и приборов учёта, диагностирует устройства и передаёт данные Серверу.",
+      "answer_keywords": [
+        "Коммуникатор",
+        "Сервер"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-architecture",
+          "contains": [
+            "Коммуникатор предназначен для сбора данных"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q05",
+      "split": "dev",
+      "type": "context",
+      "question": "Можно ли разместить сервисы Rapid SCADA на разных компьютерах?",
+      "answerable": true,
+      "expected_answer": "Да, распределённая архитектура предусматривает размещение сервисов на отдельных хостах.",
+      "answer_keywords": [
+        "отдельных"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-architecture",
+          "contains": [
+            "сервисы развёрнуты на отдельных хостах"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q06",
+      "split": "dev",
+      "type": "lookup",
+      "question": "Какое приложение Rapid SCADA управляет архивами и выполняет математические расчёты?",
+      "answerable": true,
+      "expected_answer": "Эти функции выполняет приложение Сервер.",
+      "answer_keywords": [
+        "Сервер"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-architecture",
+          "contains": [
+            "Сервер предназначен для управления архивами данных"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q07",
+      "split": "dev",
+      "type": "context",
+      "question": "Как работает Сервер при выходе пользователя из Windows?",
+      "answerable": true,
+      "expected_answer": "Сервер работает в фоновом режиме независимо от входа и выхода пользователей.",
+      "answer_keywords": [
+        "фоновом"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-applications",
+          "contains": [
+            "вне зависимости от входа и выхода пользователей"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q08",
+      "split": "dev",
+      "type": "lookup",
+      "question": "Какие форматы отчётов поддерживает Вебстанция?",
+      "answerable": true,
+      "expected_answer": "В документации названы Excel, PDF и HTML.",
+      "answer_keywords": [
+        "PDF",
+        "HTML"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-applications",
+          "contains": [
+            "Excel, PDF и HTML"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q09",
+      "split": "dev",
+      "type": "context",
+      "question": "Нужно ли обязательно устанавливать стороннюю СУБД для Rapid SCADA?",
+      "answerable": true,
+      "expected_answer": "Нет, по умолчанию используется встроенная СУБД.",
+      "answer_keywords": [
+        "встроенн"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-requirements",
+          "contains": [
+            "установка сторонней СУБД не обязательна"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "split": "dev",
+      "type": "lookup",
+      "question": "Какая среда .NET требуется Rapid SCADA 6.4?",
+      "answerable": true,
+      "expected_answer": "Требуется .NET Runtime 8.0.",
+      "answer_keywords": [
+        "8.0"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-requirements",
+          "contains": [
+            ".NET Runtime 8.0"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "split": "dev",
+      "type": "context",
+      "question": "Для чего рекомендуется включить HTTPS для Вебстанции?",
+      "answerable": true,
+      "expected_answer": "HTTPS шифрует трафик между браузером и веб-сервером, включая пароли.",
+      "answer_keywords": [
+        "шифру"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-safety",
+          "contains": [
+            "включая пароли, шифруется"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "split": "dev",
+      "type": "context",
+      "question": "Как рекомендуется организовывать доступ внешних пользователей к Rapid SCADA?",
+      "answerable": true,
+      "expected_answer": "Для внешнего доступа рекомендуется VPN и по возможности избегать открытого доступа к Вебстанции.",
+      "answer_keywords": [
+        "VPN"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-safety",
+          "contains": [
+            "Для доступа внешних пользователей рекомендуется использовать VPN"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "split": "dev",
+      "type": "fact",
+      "question": "Как в Rapid SCADA хранятся пароли в таблице пользователей?",
+      "answerable": true,
+      "expected_answer": "В таблице пользователей хранятся хэш-коды паролей.",
+      "answer_keywords": [
+        "хэш"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-safety",
+          "contains": [
+            "хранятся хэш-коды паролей"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q14",
+      "split": "dev",
+      "type": "fact",
+      "question": "Что такое канал в Rapid SCADA?",
+      "answerable": true,
+      "expected_answer": "Канал имеет номер и наименование, связан с текущими и историческими данными и событиями; аналогом является тег.",
+      "answer_keywords": [
+        "номер",
+        "данн"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-channels",
+          "contains": [
+            "Канал – это сущность"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q15",
+      "split": "dev",
+      "type": "context",
+      "question": "Влияет ли формат отображения канала на запись данных в архив?",
+      "answerable": true,
+      "expected_answer": "Формат отображения не влияет на сохранение данных в архив.",
+      "answer_keywords": [
+        "не влияет"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-channels",
+          "contains": [
+            "не влияет на сохранение данных в архив"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q16",
+      "split": "dev",
+      "type": "fact",
+      "question": "Какое приложение опрашивает устройства и могут ли линии связи работать параллельно?",
+      "answerable": true,
+      "expected_answer": "Устройства опрашивает Коммуникатор; линии связи независимы и работают параллельно.",
+      "answer_keywords": [
+        "Коммуникатор",
+        "параллельно"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-polling",
+          "contains": [
+            "работают параллельно"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q17",
+      "split": "dev",
+      "type": "fact",
+      "question": "На каком языке пишутся пользовательские скрипты Rapid SCADA?",
+      "answerable": true,
+      "expected_answer": "Скрипты пишутся на C# с использованием классов .NET.",
+      "answer_keywords": [
+        "C#"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-scripts",
+          "contains": [
+            "синтаксису языка C#"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q18",
+      "split": "dev",
+      "type": "context",
+      "question": "Что произойдёт, если скрипт или формула содержит ошибку?",
+      "answerable": true,
+      "expected_answer": "Ошибка в скрипте или формуле делает работу Сервера невозможной; сведения записываются в журнал.",
+      "answer_keywords": [
+        "невозможна"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-scripts",
+          "contains": [
+            "работа Сервера невозможна"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q19",
+      "split": "test",
+      "type": "lookup",
+      "question": "Где создают и редактируют пользователей Rapid SCADA?",
+      "answerable": true,
+      "expected_answer": "В приложении Администратор через таблицу Пользователи.",
+      "answer_keywords": [
+        "Администратор"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-users",
+          "contains": [
+            "через таблицу Пользователи"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q20",
+      "split": "test",
+      "type": "context",
+      "question": "Чем права стандартных ролей Диспетчер и Гость отличаются?",
+      "answerable": true,
+      "expected_answer": "Диспетчер может просматривать информацию и отправлять команды, Гость только просматривает информацию.",
+      "answer_keywords": [
+        "команд"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-users",
+          "contains": [
+            "Диспетчер Может просматривать информацию и отправлять команды"
+          ]
+        },
+        {
+          "source_id": "rapid-users",
+          "contains": [
+            "Гость Может просматривать информацию"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q21",
+      "split": "test",
+      "type": "fact",
+      "question": "Можно ли изменять стандартные роли Rapid SCADA?",
+      "answerable": true,
+      "expected_answer": "Нет, стандартные роли изменять нельзя.",
+      "answer_keywords": [
+        "нельзя"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-users",
+          "contains": [
+            "Их нельзя изменять"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q22",
+      "split": "test",
+      "type": "lookup",
+      "question": "В каких СУБД модуль экспорта может сохранять данные?",
+      "answerable": true,
+      "expected_answer": "Поддерживаются Microsoft SQL Server, Oracle, PostgreSQL и MySQL.",
+      "answer_keywords": [
+        "PostgreSQL",
+        "MySQL"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-export",
+          "contains": [
+            "Microsoft SQL Server, Oracle, PostgreSQL и MySQL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q23",
+      "split": "test",
+      "type": "fact",
+      "question": "В каких режимах протокола работает драйвер Modbus Slave?",
+      "answerable": true,
+      "expected_answer": "Драйвер поддерживает Modbus RTU и Modbus TCP.",
+      "answer_keywords": [
+        "RTU",
+        "TCP"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-modbus",
+          "contains": [
+            "Modbus RTU, так и в режиме Modbus TCP"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q24",
+      "split": "test",
+      "type": "context",
+      "question": "Какие действия записывает Журнал аудита и в какую базу?",
+      "answerable": true,
+      "expected_answer": "Плагин записывает действия пользователей Вебстанции в PostgreSQL: вход, выход, просмотры, отчёты и команды.",
+      "answer_keywords": [
+        "PostgreSQL"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-audit",
+          "contains": [
+            "в базу данных PostgreSQL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q25",
+      "split": "test",
+      "type": "fact",
+      "question": "От каких атак защищает плагин Защитник?",
+      "answerable": true,
+      "expected_answer": "Защитник обнаруживает атаки перебором и блокирует запросы нарушителя.",
+      "answer_keywords": [
+        "брутфорс"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-guard",
+          "contains": [
+            "методом брутфорса"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q26",
+      "split": "test",
+      "type": "multi_document",
+      "question": "Как связаны общие рекомендации по паролям и назначение плагина Защитник?",
+      "answerable": true,
+      "expected_answer": "Рекомендации требуют сменить пароли по умолчанию, а Защитник обнаруживает и блокирует попытки перебора.",
+      "answer_keywords": [
+        "парол",
+        "брутфорс"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-safety",
+          "contains": [
+            "изменить пароли, установленные по умолчанию"
+          ]
+        },
+        {
+          "source_id": "rapid-guard",
+          "contains": [
+            "методом брутфорса"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q27",
+      "split": "test",
+      "type": "multi_document",
+      "question": "Чем журнал аудита отличается от рекомендаций по HTTPS?",
+      "answerable": true,
+      "expected_answer": "Журнал аудита фиксирует действия пользователей в PostgreSQL, HTTPS шифрует трафик с браузером.",
+      "answer_keywords": [
+        "PostgreSQL",
+        "шифру"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-audit",
+          "contains": [
+            "в базу данных PostgreSQL"
+          ]
+        },
+        {
+          "source_id": "rapid-safety",
+          "contains": [
+            "включая пароли, шифруется"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q28",
+      "split": "test",
+      "type": "multi_document",
+      "question": "Какие приложения отвечают за сбор данных с устройств и за управление архивами?",
+      "answerable": true,
+      "expected_answer": "Коммуникатор собирает данные, Сервер управляет архивами.",
+      "answer_keywords": [
+        "Коммуникатор",
+        "Сервер"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-polling",
+          "contains": [
+            "приложением Коммуникатор"
+          ]
+        },
+        {
+          "source_id": "rapid-architecture",
+          "contains": [
+            "Сервер предназначен для управления архивами данных"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q29",
+      "split": "test",
+      "type": "multi_document",
+      "question": "Где редактируют пользователей и как обеспечивают защиту хранимых паролей?",
+      "answerable": true,
+      "expected_answer": "Пользователей редактируют в Администраторе; таблица содержит хэш-коды паролей.",
+      "answer_keywords": [
+        "Администратор",
+        "хэш"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-users",
+          "contains": [
+            "через таблицу Пользователи"
+          ]
+        },
+        {
+          "source_id": "rapid-safety",
+          "contains": [
+            "хранятся хэш-коды паролей"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q30",
+      "split": "test",
+      "type": "lookup",
+      "question": "Какой формат имеет отчёт Журнала аудита?",
+      "answerable": true,
+      "expected_answer": "Отчёт формируется в формате XLSX.",
+      "answer_keywords": [
+        "XLSX"
+      ],
+      "evidence": [
+        {
+          "source_id": "rapid-audit",
+          "contains": [
+            "Отчёт формируется в формате XLSX"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "q31",
+      "split": "dev",
+      "type": "unanswerable",
+      "question": "Какой точный IP-адрес SCADA-сервера Дубоссарской ГЭС?",
+      "answerable": false,
+      "expected_answer": "В корпусе нет сведений о сети конкретной ГЭС.",
+      "answer_keywords": [],
+      "evidence": []
+    },
+    {
+      "id": "q32",
+      "split": "dev",
+      "type": "unanswerable",
+      "question": "Какой пароль администратора установлен на SCADA Дубоссарской ГЭС?",
+      "answerable": false,
+      "expected_answer": "Документы не содержат пароль конкретного объекта.",
+      "answer_keywords": [],
+      "evidence": []
+    },
+    {
+      "id": "q33",
+      "split": "dev",
+      "type": "unanswerable",
+      "question": "Сколько кибератак произошло на Дубоссарской ГЭС в 2025 году?",
+      "answerable": false,
+      "expected_answer": "Статистика атак на объект отсутствует.",
+      "answer_keywords": [],
+      "evidence": []
+    },
+    {
+      "id": "q34",
+      "split": "test",
+      "type": "unanswerable",
+      "question": "Какова стоимость внедрения Rapid SCADA на объекте ЭнергоИнвестПроект?",
+      "answerable": false,
+      "expected_answer": "Коммерческое предложение для конкретного объекта отсутствует.",
+      "answer_keywords": [],
+      "evidence": []
+    },
+    {
+      "id": "q35",
+      "split": "test",
+      "type": "unanswerable",
+      "question": "Какая модель ПЛК установлена на гидроагрегате №3 Дубоссарской ГЭС?",
+      "answerable": false,
+      "expected_answer": "Состав оборудования конкретного агрегата не описан.",
+      "answer_keywords": [],
+      "evidence": []
+    },
+    {
+      "id": "q36",
+      "split": "test",
+      "type": "unanswerable",
+      "question": "Какая погода будет завтра в Кишинёве?",
+      "answerable": false,
+      "expected_answer": "Прогнозов погоды в корпусе нет.",
+      "answer_keywords": [],
+      "evidence": []
+    }
+  ]
+}

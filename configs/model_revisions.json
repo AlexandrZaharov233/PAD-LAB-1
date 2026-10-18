@@ -1,0 +1,7 @@
+{
+  "intfloat/multilingual-e5-small": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2": "e8f8c211226b894fcb81acc59f3b34ba3efd5f42",
+  "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1": "1427fd652930e4ba29e8149678df786c240d8825",
+  "Helsinki-NLP/opus-mt-roa-en": "c26705dd23ff67aa0019dbde41e9456c3a0900ef",
+  "Helsinki-NLP/opus-mt-en-ru": "bb09c99d180016eac6819df3dae68edb1690fdee"
+}
